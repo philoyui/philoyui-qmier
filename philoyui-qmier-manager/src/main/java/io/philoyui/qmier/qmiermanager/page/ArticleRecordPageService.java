@@ -91,7 +91,7 @@ public class ArticleRecordPageService extends PageService<ArticleRecordEntity,Lo
                         new BatchActionOperation("分析","analysis", ButtonStyle.Orange)
                 )
                 .withColumnAction(
-                        new NewPageOperation("原页面","http://www.aishxs.biz/#detailUrl#","原页面","detailUrl"),
+                        new NewPageOperation("原页面","/admin/article_record/detailUrl?id=#id#&siteId=#siteId#","原页面","id","siteId"),
                         new ConfirmOperation("fetch","抓取"),
                         new EditOperation(),
                         new DeleteOperation()
@@ -131,6 +131,11 @@ public class ArticleRecordPageService extends PageService<ArticleRecordEntity,Lo
     @Override
     public void delete(ArticleRecordEntity articleRecordEntity) {
         articleRecordService.delete(articleRecordEntity.getId());
+    }
+
+    @Override
+    public void delete(List<ArticleRecordEntity> entities) {
+        articleRecordService.delete(entities);
     }
 
     @Override

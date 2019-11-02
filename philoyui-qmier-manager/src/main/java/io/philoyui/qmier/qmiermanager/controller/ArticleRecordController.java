@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,6 +99,18 @@ public class ArticleRecordController {
 
         return ResponseEntity.ok("success");
 
+    }
+
+    @RequestMapping("/detailUrl")
+    public String detailUrl(@RequestParam Long id,@RequestParam Long siteId) throws UnsupportedEncodingException {
+
+        ArticleRecordEntity articleRecordEntity = articleRecordService.get(id);
+
+        SiteEntity siteEntity = siteService.get(siteId);
+
+        String redirectUrl = siteEntity.getMainUrl() + articleRecordEntity.getDetailUrl();
+
+        return "redirect:"+redirectUrl;
     }
 
     @RequestMapping("/analysis")
